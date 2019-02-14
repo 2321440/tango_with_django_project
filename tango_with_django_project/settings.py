@@ -32,6 +32,7 @@ SECRET_KEY = '2l8(e1ghmy40=vm!cxql%&84z6dlcao2hr8+8qrh8-j0y1_-6l'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+LOGIN_URL = '/rango/login/'
 
 STATICFILES_DIRS = [STATIC_DIR, ]
 # Application definition
@@ -55,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
 
 ROOT_URLCONF = 'tango_with_django_project.urls'
 
@@ -80,6 +83,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tango_with_django_project.wsgi.application'
 
+PASSWORD_HASHERS = (
+'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+)
+
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -99,9 +107,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
+   {
+		'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+		'OPTIONS': { 'min_length': 6, }
+	},
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
@@ -128,3 +137,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
